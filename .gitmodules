@@ -1,0 +1,3 @@
+[submodule "vendor/modulus"]
+	path = vendor/modulus
+	url = https://github.com/Vasco-Alves/modulus.git
