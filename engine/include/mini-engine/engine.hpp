@@ -1,22 +1,21 @@
 #pragma once
 
+#include "application.hpp"
 #include <string>
 
 namespace me {
 
-    struct EngineConfig {
-        std::string title = "Mini Engine App";
-        int width = 1280;
-        int height = 720;
-    };
+	class Registry;
 
-    // Initialize Modulus, Window, and Context
-    bool init(const EngineConfig& config);
+	// The main entry point. 
+	// Initializes Modulus, creates the Window, runs the Loop, and cleans up.
+	// Blocks until the game is closed.
+	void run(Application& app, const AppConfig& config = {});
 
-    // Run the main loop
-    void run();
+	// Global Accessors
+	Registry& get_registry();
 
-    // Cleanup
-    void shutdown();
+	// Request the engine to stop (e.g. from a Quit button)
+	void close_application();
 
 }

@@ -3,6 +3,18 @@ file(GLOB_RECURSE ENGINE_SOURCES "src/*.cpp" "include/*.hpp")
 
 add_library(mini_engine ${ENGINE_SOURCES})
 
+# set(SOURCES
+#     "src/engine.cpp"
+#     "src/entity.cpp"
+# )
+
+# set(HEADERS
+#     "include/engine.hpp"
+#     "include/entity.hpp"
+# )
+
+# add_library(mini_engine ${SOURCES} ${HEADERS})
+
 # Include Paths
 target_include_directories(mini_engine PUBLIC 
     "include"
