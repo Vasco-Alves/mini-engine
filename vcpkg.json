@@ -1,6 +1,6 @@
 {
   "name": "mini-engine",
-  "version-string": "0.2.1",
+  "version-string": "0.2.2",
   "description": "A simple 3D engine using the modulus framework.",
   "dependencies": [
     "glfw3",

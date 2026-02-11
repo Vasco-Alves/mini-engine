@@ -1,7 +1,7 @@
 #include "mini-engine/engine.hpp"
 #include "mini-engine/registry.hpp"
+#include "mini-engine/input.hpp"
 
-// Modulus Includes
 #include <modulus/core/context.hpp>
 #include <modulus/platform/platform.hpp>
 #include <modulus/gfx/graphics.hpp>
@@ -94,6 +94,8 @@ namespace me {
 
 			// Render Present
 			modulus::gfx::present(*s_State.window);
+
+			me::input::poll();
 		}
 
 		// 4. User Shutdown
@@ -114,4 +116,4 @@ namespace me {
 		s_State.running = false;
 	}
 
-}
+} // namespace me
