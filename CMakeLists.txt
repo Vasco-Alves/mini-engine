@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Initialize Project with Vcpkg Toolchain support
-project(mini-engine-modulus 
-    VERSION 0.1.0 
+project(
+    "mini-engine"
+    VERSION 0.2.1
+    DESCRIPTION "A simple game engine using the modulus framework"
     LANGUAGES C CXX
 )
 
