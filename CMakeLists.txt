@@ -32,4 +32,9 @@ add_subdirectory(vendor/modulus)
 # 3. Build Engine & Sandbox
 # ==============================================================================
 add_subdirectory(engine)
-add_subdirectory(sandbox)
+
+# If this is the top-level project, build the sandbox.
+# If someone included us as a submodule, CMAKE_SOURCE_DIR will be their game folder, so we skip building the sandbox!
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(sandbox)
+endif()
