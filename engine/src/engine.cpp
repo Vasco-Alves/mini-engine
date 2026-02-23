@@ -1,11 +1,12 @@
 #include "mini-engine/engine.hpp"
-#include "mini-engine/registry.hpp"
 #include "mini-engine/input.hpp"
 
 #include <modulus/core/context.hpp>
 #include <modulus/platform/platform.hpp>
 #include <modulus/gfx/graphics.hpp>
 #include <modulus/core/log.hpp>
+
+#include <mini-ecs/registry.hpp>
 
 #include <memory>
 #include <chrono>
@@ -22,8 +23,7 @@ namespace me {
 
 	static EngineState s_State;
 
-	// Internal initialization function
-	bool internal_init(const AppConfig& config) {
+	bool init(const AppConfig& config) {
 		s_State.config = config;
 
 		// 1. Modulus Init
@@ -51,7 +51,7 @@ namespace me {
 
 	void run(Application& app, const AppConfig& config) {
 		// 1. Initialize System
-		if (!internal_init(config)) {
+		if (!init(config)) {
 			MOD_FATAL("Engine failed to initialize!");
 			return;
 		}

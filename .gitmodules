@@ -1,3 +1,6 @@
 [submodule "vendor/modulus"]
 	path = vendor/modulus
 	url = https://github.com/Vasco-Alves/modulus.git
+[submodule "vendor/mini-ecs"]
+	path = vendor/mini-ecs
+	url = https://github.com/Vasco-Alves/mini-ecs.git

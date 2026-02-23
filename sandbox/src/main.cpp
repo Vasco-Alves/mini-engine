@@ -1,7 +1,8 @@
 #include <mini-engine/engine.hpp>
-#include <mini-engine/registry.hpp>
 #include <mini-engine/components.hpp>
 #include <mini-engine/input.hpp>
+
+#include <mini-ecs/registry.hpp>
 
 #include <iostream>
 
