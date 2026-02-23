@@ -27,6 +27,9 @@ public:
 		player2 = reg.create_entity("Player2");
 		player2.add_component(me::components::Transform{ 0, 0, 0 });
 		std::cout << "Created Entity ID: " << player2.id() << std::endl;
+
+		if (player.has_component<me::components::Transform>())
+			std::cout << "Player has a transform!" << std::endl;
 	}
 
 	void on_update(float dt) override {
