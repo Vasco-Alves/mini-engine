@@ -1,6 +1,6 @@
 #pragma once
 
-#include "application.hpp"
+#include "mini-engine/core/application.hpp"
 
 #include <string>
 

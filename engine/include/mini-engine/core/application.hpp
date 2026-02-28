@@ -16,7 +16,10 @@ namespace me {
 		virtual ~Application() = default;
 
 		// Called once when the engine starts
-		virtual void on_start() {}
+		virtual void on_start(int width, int height) {}
+
+		// Called when the window changes size
+		virtual void on_resize(int width, int height) {}
 
 		// Called every frame. dt = delta time in seconds.
 		virtual void on_update(float dt) {}
@@ -26,6 +29,10 @@ namespace me {
 
 		// Called when the window is closing
 		virtual void on_shutdown() {}
+
+	protected:
+		int width;
+		int height;
 	};
 
 }

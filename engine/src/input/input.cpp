@@ -1,6 +1,7 @@
-#include "mini-engine/input.hpp"
+#include "mini-engine/input/input.hpp"
 
 #include <modulus/platform/input.hpp>
+
 #include <unordered_map>
 #include <vector>
 

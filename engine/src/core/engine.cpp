@@ -1,5 +1,6 @@
-#include "mini-engine/engine.hpp"
-#include "mini-engine/input.hpp"
+#include "mini-engine/core/engine.hpp"
+#include "mini-engine/input/input.hpp"
+#include "mini-engine/render/renderer.hpp"
 
 #include <modulus/core/context.hpp>
 #include <modulus/platform/platform.hpp>
@@ -26,7 +27,7 @@ namespace me {
 	bool init(const AppConfig& config) {
 		s_State.config = config;
 
-		// 1. Modulus Init
+		// -- Modulus Init --
 		s_State.context = std::make_unique<modulus::Context>();
 		if (!s_State.context->is_valid()) return false;
 
@@ -41,8 +42,11 @@ namespace me {
 
 		if (!modulus::gfx::init()) return false;
 
-		// 2. ECS Init
+		// -- ECS Init --
 		s_State.registry = std::make_unique<Registry>();
+
+		// -- Engine Init --
+		me::Renderer::init();
 
 		MOD_INFO("Mini Engine Initialized.");
 		s_State.running = true;
@@ -57,7 +61,7 @@ namespace me {
 		}
 
 		// 2. User Start
-		app.on_start();
+		app.on_start(config.width, config.height);
 
 		// 3. Main Loop
 		using Clock = std::chrono::high_resolution_clock;
@@ -65,6 +69,9 @@ namespace me {
 
 		double accumulator = 0.0;
 		int frames = 0;
+
+		int last_width = s_State.config.width;
+		int last_height = s_State.config.height;
 
 		while (s_State.running && s_State.window->update()) {
 			auto current_time = Clock::now();
@@ -83,9 +90,25 @@ namespace me {
 				accumulator = 0.0;
 			}
 
-			// User Update
+			// -- Handle Resizing --
+			int current_width = s_State.window->width();
+			int current_height = s_State.window->height();
+
+			if (current_width != last_width || current_height != last_height) {
+				// 1. Tell OpenGL the new render area
+				modulus::gfx::set_viewport(0, 0, current_width, current_height);
+
+				// 2. Tell the game
+				app.on_resize(current_width, current_height);
+
+				last_width = current_width;
+				last_height = current_height;
+			}
+
+			// -- Update Game --
 			app.on_update(dt);
 
+			// -- Render --
 			// Render Prep
 			modulus::gfx::clear({ 0.1f, 0.1f, 0.12f, 1.0f });
 
