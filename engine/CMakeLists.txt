@@ -18,6 +18,7 @@ target_include_directories(mini_engine PUBLIC
     "include/mini-engine/ecs"
     "include/mini-engine/input"
     "include/mini-engine/render"
+    "include/mini-engine/scene"
 )
 
 # This gives us access to modulus::*, glm::*, and mini-ecs::*

@@ -29,10 +29,6 @@ namespace me {
 
 		// Called when the window is closing
 		virtual void on_shutdown() {}
-
-	protected:
-		int width;
-		int height;
 	};
 
 }
