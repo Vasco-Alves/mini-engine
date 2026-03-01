@@ -40,9 +40,9 @@ namespace me {
 		delete s_Data;
 	}
 
-	void Renderer::begin_scene(const camera::PerspectiveCamera& camera) {
+	void Renderer::begin_scene(const glm::mat4& view_projection) {
 		s_Data->color_shader->bind();
-		s_Data->color_shader->set_mat4("u_ViewProjection", camera.get_view_projection_matrix());
+		s_Data->color_shader->set_mat4("u_ViewProjection", view_projection);
 	}
 
 	void Renderer::end_scene() {}

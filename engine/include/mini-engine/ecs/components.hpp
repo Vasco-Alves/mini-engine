@@ -39,11 +39,24 @@ namespace me::components {
 	};
 
 	struct CameraComponent {
-		glm::vec3 target = { 0.0f, 0.0f, 0.0f }; // Look at
-		glm::vec3 up = { 0.0f, 1.0f, 0.0f };
-		float fovy = 45.0f;
-		int projection = 0; // 0 = Perspective / 1 = Orthographic
-		bool active = true;
+		enum class ProjectionType { Perspective = 0, Orthographic = 1 };
+
+		ProjectionType type = ProjectionType::Perspective;
+
+		// Projection parameters
+		float fov = 45.0f;
+		float aspect_ratio = 16.0f / 9.0f;
+		float near_clip = 0.1f;
+		float far_clip = 100.0f;
+
+		// Orthographic specific
+		float ortho_size = 10.0f;
+
+		glm::vec4 viewport = { 0.0f, 0.0f, 1.0f, 1.0f };
+		int render_priority = 0;
+
+		bool is_main_camera = true;
+		bool is_active = true;
 	};
 
 } // namespace me::components

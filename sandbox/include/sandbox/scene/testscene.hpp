@@ -1,7 +1,7 @@
 #pragma once
 
 #include <mini-engine/scene/scene.hpp>
-#include <mini-engine/render/perspective_camera.hpp>
+#include <mini-ecs/entity.hpp> 
 
 namespace sandbox {
 
@@ -14,11 +14,9 @@ namespace sandbox {
 		void on_close() override;
 
 	private:
-		std::unique_ptr<me::camera::PerspectiveCamera> camera;
-		glm::vec3 cameraPos = { 0.0f, 0.0f, 0.0f };
-		float cameraSpeed = 1.0f;
+		me::entity::entity_id main_camera;
 
-		float cubeRotation = 0.0f;
+		float cameraSpeed = 5.0f;
 	};
 
 } // namespace sandbox

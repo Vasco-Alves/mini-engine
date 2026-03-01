@@ -1,10 +1,9 @@
 set(SOURCES
     "src/core/engine.cpp"
     "src/input/input.cpp"
-    "src/render/orthographic_camera.cpp"
-    "src/render/perspective_camera.cpp"
     "src/render/renderer.cpp"
- "src/render/mesh.cpp")
+    "src/render/mesh.cpp"
+)
 
 add_library(mini_engine ${SOURCES})
 
@@ -19,6 +18,7 @@ target_include_directories(mini_engine PUBLIC
     "include/mini-engine/input"
     "include/mini-engine/render"
     "include/mini-engine/scene"
+    "include/mini-engine/systems"
 )
 
 # This gives us access to modulus::*, glm::*, and mini-ecs::*
