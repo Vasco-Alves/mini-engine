@@ -1,40 +1,7 @@
 #include <mini-engine/core/engine.hpp>
-#include <mini-engine/input/input.hpp>
-#include <mini-engine/scene/scene.hpp>
+#include <mini-engine/core/application.hpp>
 
-#include "sandbox/scene/testscene.hpp"
-
-class SandboxGame : public me::Application {
-public:
-	void on_start(int width, int height) override {
-		active_scene = std::make_shared<sandbox::TestScene>();
-		active_scene->on_start(width, height);
-	}
-
-	void on_resize(int width, int height) override {
-		active_scene->on_resize(width, height);
-	}
-
-	void on_update(float dt) override {
-		if (me::input::action_pressed("Quit")) {
-			active_scene->on_close();
-			me::close_application();
-		}
-
-		active_scene->on_update(dt);
-	}
-
-	void on_render() override {
-		active_scene->on_render();
-	}
-
-	void on_shutdown() override {
-		active_scene->on_close();
-	}
-
-public:
-	std::shared_ptr<me::Scene> active_scene;
-};
+#include "sandbox/core/Game.hpp"
 
 int main() {
 	me::AppConfig config;
@@ -43,7 +10,7 @@ int main() {
 	config.height = 1080;
 	config.vsync = false;
 
-	SandboxGame game;
+	sandbox::SandboxGame game;
 
 	me::run(game, config);
 

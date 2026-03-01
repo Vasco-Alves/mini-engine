@@ -28,6 +28,7 @@ namespace sandbox {
 		// -- Camera Initialization --
 		float aspectRatio = (float)width / (float)height;
 		camera = std::make_unique<me::camera::PerspectiveCamera>(45.0f, aspectRatio, 0.1f, 100.0f);
+		cameraPos = { 0.0f, 0.0f, 20.0f };
 		camera->set_position(cameraPos);
 
 		// -- Entity Creation --

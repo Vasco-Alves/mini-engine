@@ -15,7 +15,7 @@ namespace sandbox {
 
 	private:
 		std::unique_ptr<me::camera::PerspectiveCamera> camera;
-		glm::vec3 cameraPos = { 0.0f, 0.0f, 3.0f };
+		glm::vec3 cameraPos = { 0.0f, 0.0f, 0.0f };
 		float cameraSpeed = 1.0f;
 
 		float cubeRotation = 0.0f;
