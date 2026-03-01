@@ -12,7 +12,7 @@ namespace me::camera {
 		// Create a transform for the camera (Position + Rotation)
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position) * glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation), glm::vec3(0, 0, 1));
 
-		// The View Matrix is the INVERSE of the Camera's Transform
+		// The View Matrix is the INVERSE of the Camera's TransformComponent
 		// (Moving camera right = Moving world left)
 		m_ViewMatrix = glm::inverse(transform);
 

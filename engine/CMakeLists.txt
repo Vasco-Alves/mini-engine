@@ -4,7 +4,7 @@ set(SOURCES
     "src/render/orthographic_camera.cpp"
     "src/render/perspective_camera.cpp"
     "src/render/renderer.cpp"
-)
+ "src/render/mesh.cpp")
 
 add_library(mini_engine ${SOURCES})
 
