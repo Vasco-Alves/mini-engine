@@ -16,7 +16,7 @@ namespace sandbox {
 	private:
 		me::entity::entity_id main_camera;
 
-		float cameraSpeed = 5.0f;
+		float camera_speed = 5.0f;
 	};
 
 } // namespace sandbox

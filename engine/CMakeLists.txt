@@ -3,6 +3,7 @@ set(SOURCES
     "src/input/input.cpp"
     "src/render/renderer.cpp"
     "src/render/mesh.cpp"
+    "src/src/render_system.cpp"
 )
 
 add_library(mini_engine ${SOURCES})

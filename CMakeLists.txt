@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
     "mini-engine"
-    VERSION 0.2.2
+    VERSION 0.3.0
     DESCRIPTION "A simple game engine using the modulus framework"
     LANGUAGES C CXX
 )
@@ -10,7 +10,7 @@ project(
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 1. Dependencies (Provided by Vcpkg)
+# Dependencies (Provided by Vcpkg)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 
@@ -19,14 +19,14 @@ if(TARGET glfw3::glfw)
     add_library(glfw ALIAS glfw3::glfw)
 endif()
 
-# 2. Add Modulus
+# Add Modulus
 # This will build Modulus, using the GLFW we just found above.
 add_subdirectory(vendor/modulus)
 
-# 3. Add ECS library
+# Add ECS library
 add_subdirectory(vendor/mini-ecs)
 
-# 4. Build Engine & Sandbox
+# Build Engine & Sandbox
 add_subdirectory(engine)
 
 # If this is the top-level project, build the sandbox.

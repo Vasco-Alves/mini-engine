@@ -11,4 +11,9 @@ target_link_libraries(sandbox PRIVATE mini_engine)
 target_include_directories(sandbox PRIVATE "include")
 
 # Copy assets to build directory (Optional, but useful)
-file(COPY "${CMAKE_SOURCE_DIR}/sandbox/assets" DESTINATION "${CMAKE_BINARY_DIR}")
+# Run a copy command EVERY time the sandbox finishes building
+add_custom_command(TARGET sandbox POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+        "$<TARGET_FILE_DIR:sandbox>/assets"
+)

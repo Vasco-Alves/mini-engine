@@ -5,7 +5,7 @@
 
 int main() {
 	me::AppConfig config;
-	config.title = "My Game";
+	config.title = "Mini Engine Test";
 	config.width = 1920;
 	config.height = 1080;
 	config.vsync = false;

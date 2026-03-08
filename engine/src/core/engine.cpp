@@ -3,14 +3,14 @@
 #include "mini-engine/render/renderer.hpp"
 
 #include <modulus/core/context.hpp>
+#include <modulus/core/log.hpp>
+#include <modulus/core/timer.hpp>
 #include <modulus/platform/platform.hpp>
 #include <modulus/gfx/graphics.hpp>
-#include <modulus/core/log.hpp>
 
 #include <mini-ecs/registry.hpp>
 
 #include <memory>
-#include <chrono>
 
 namespace me {
 
@@ -27,10 +27,11 @@ namespace me {
 	bool init(const AppConfig& config) {
 		s_State.config = config;
 
-		// -- Modulus Init --
-		s_State.context = std::make_unique<modulus::Context>();
+		// 1. Modulus Init (Starts Core, Platform, and Audio)
+		s_State.context = std::make_unique<modulus::Context>(modulus::InitFlags::Everything);
 		if (!s_State.context->is_valid()) return false;
 
+		// 2. Window Creation
 		modulus::platform::WindowConfig winConfig;
 		winConfig.title = config.title;
 		winConfig.width = config.width;
@@ -40,12 +41,11 @@ namespace me {
 		s_State.window = modulus::platform::create_window(winConfig);
 		if (!s_State.window) return false;
 
+		// 3. Modulus Graphics Init
 		if (!modulus::gfx::init()) return false;
 
-		// -- ECS Init --
+		// 4. ECS & Engine Init
 		s_State.registry = std::make_unique<Registry>();
-
-		// -- Engine Init --
 		me::Renderer::init();
 
 		MOD_INFO("Mini Engine Initialized.");
@@ -63,10 +63,10 @@ namespace me {
 		// 2. User Start
 		app.on_start(config.width, config.height);
 
-		// 3. Main Loop
-		using Clock = std::chrono::high_resolution_clock;
-		auto last_time = Clock::now();
+		// 3. Create Timer
+		modulus::core::Timer frame_timer;
 
+		// 4. Main Loop
 		double accumulator = 0.0;
 		int frames = 0;
 
@@ -74,10 +74,9 @@ namespace me {
 		int last_height = s_State.config.height;
 
 		while (s_State.running && s_State.window->update()) {
-			auto current_time = Clock::now();
-			std::chrono::duration<double> diff = current_time - last_time;
-			last_time = current_time;
-			float dt = static_cast<float>(diff.count());
+			// Delta Time
+			float dt = frame_timer.elapsed();
+			frame_timer.reset();
 
 			// --- FPS Counter Logic ---
 			accumulator += dt;
@@ -95,10 +94,7 @@ namespace me {
 			int current_height = s_State.window->height();
 
 			if (current_width != last_width || current_height != last_height) {
-				// 1. Tell OpenGL the new render area
 				modulus::gfx::set_viewport(0, 0, current_width, current_height);
-
-				// 2. Tell the game
 				app.on_resize(current_width, current_height);
 
 				last_width = current_width;
@@ -128,6 +124,7 @@ namespace me {
 		s_State.registry.reset();
 		s_State.window.reset();
 		s_State.context.reset();
+
 		MOD_INFO("Mini Engine Shutdown.");
 	}
 
