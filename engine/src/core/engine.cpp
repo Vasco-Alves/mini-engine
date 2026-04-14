@@ -41,7 +41,7 @@ namespace me {
 		s_State.window = modulus::platform::create_window(winConfig);
 		if (!s_State.window) return false;
 
-		// 3. Modulus Graphics Init
+		// 3. Modulus Manual Graphics Init
 		if (!modulus::gfx::init()) return false;
 
 		// 4. ECS & Engine Init
@@ -63,15 +63,13 @@ namespace me {
 		// 2. User Start
 		app.on_start(config.width, config.height);
 
-		// 3. Create Timer
-		modulus::core::Timer frame_timer;
-
-		// 4. Main Loop
-		double accumulator = 0.0;
-		int frames = 0;
-
 		int last_width = s_State.config.width;
 		int last_height = s_State.config.height;
+
+		// 3. Main Loop
+		double accumulator = 0.0;
+		int frames = 0;
+		modulus::core::Timer frame_timer;
 
 		while (s_State.running && s_State.window->update()) {
 			// Delta Time
@@ -82,7 +80,6 @@ namespace me {
 			accumulator += dt;
 			frames++;
 			if (accumulator >= 1.0) {
-				// We use the original title from config and append FPS
 				std::string title = s_State.config.title + " | FPS: " + std::to_string(frames);
 				s_State.window->set_title(title);
 				frames = 0;
@@ -105,13 +102,8 @@ namespace me {
 			app.on_update(dt);
 
 			// -- Render --
-			// Render Prep
 			modulus::gfx::clear({ 0.1f, 0.1f, 0.12f, 1.0f });
-
-			// User Render
 			app.on_render();
-
-			// Render Present
 			modulus::gfx::present(*s_State.window);
 
 			me::input::poll();
