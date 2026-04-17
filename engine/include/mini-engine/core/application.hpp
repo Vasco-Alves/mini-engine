@@ -38,6 +38,7 @@ namespace me {
 			if (m_active_scene) m_active_scene->on_close();
 		}
 
+		// Loads new scene into memory
 		void load_scene(std::shared_ptr<Scene> scene, int current_width, int current_height) {
 			if (m_active_scene) m_active_scene->on_close();
 

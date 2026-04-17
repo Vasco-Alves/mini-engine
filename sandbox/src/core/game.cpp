@@ -7,6 +7,7 @@
 namespace sandbox {
 
 	void SandboxGame::on_start(int width, int height) {
+		// --- Load Scene
 		load_scene(std::make_shared<TestScene>(), width, height);
 	}
 

@@ -60,7 +60,7 @@ namespace me {
 			return;
 		}
 
-		// 2. User Start
+		// 2. Start Game
 		app.on_start(config.width, config.height);
 
 		int last_width = s_State.config.width;

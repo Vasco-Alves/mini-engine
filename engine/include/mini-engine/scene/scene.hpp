@@ -12,8 +12,9 @@ namespace me {
 	public:
 		virtual ~Scene() = default;
 
-		virtual void on_resize(int width, int height) {}
 		virtual void on_start(int width, int height) {}
+
+		virtual void on_resize(int width, int height) {}
 
 		virtual void on_update(float dt) {
 			for (auto& system : systems)
@@ -38,4 +39,4 @@ namespace me {
 		std::vector<std::unique_ptr<System>> systems;
 	};
 
-}
+} // namespace me

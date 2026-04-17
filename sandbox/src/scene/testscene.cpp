@@ -32,7 +32,7 @@ namespace sandbox {
 		me::input::bind_action("RotateL", me::input::Key::Left);
 		me::input::bind_action("RotateR", me::input::Key::Right);
 
-		// -- Camera Initialization --
+		// -- Camera Creation --
 		main_camera = m_registry.create_entity("MainCamera");
 
 		me::components::TransformComponent cam_transform;
