@@ -44,20 +44,6 @@ namespace me::components {
 		}
 	};
 
-	struct VelocityComponent {
-		glm::vec3 velocity = { 0.0f, 0.0f, 0.0f };
-	};
-
-	struct MeshComponent {
-		std::shared_ptr<me::Mesh> mesh;
-		std::shared_ptr<me::Material> material = nullptr;
-		glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
-
-		MeshComponent() = default;
-		MeshComponent(std::shared_ptr<me::Mesh> m) : mesh(m) {}
-		MeshComponent(std::shared_ptr<me::Mesh> m, const glm::vec4& c) : mesh(m), color(c) {}
-	};
-
 	struct CameraComponent {
 		enum class ProjectionType { Perspective = 0, Orthographic = 1 };
 
@@ -77,6 +63,29 @@ namespace me::components {
 
 		bool is_main_camera = true;
 		bool is_active = true;
+	};
+
+	struct SpriteComponent {
+		std::shared_ptr<modulus::gfx::Texture2D> texture;
+		glm::vec4 tint{ 1.0f, 1.0f, 1.0f, 1.0f }; // Base color (white)
+
+		SpriteComponent(const std::string& path) {
+			texture = std::make_shared<modulus::gfx::Texture2D>(path);
+		}
+	};
+
+	struct VelocityComponent {
+		glm::vec3 velocity = { 0.0f, 0.0f, 0.0f };
+	};
+
+	struct MeshComponent {
+		std::shared_ptr<me::Mesh> mesh;
+		std::shared_ptr<me::Material> material = nullptr;
+		glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+		MeshComponent() = default;
+		MeshComponent(std::shared_ptr<me::Mesh> m) : mesh(m) {}
+		MeshComponent(std::shared_ptr<me::Mesh> m, const glm::vec4& c) : mesh(m), color(c) {}
 	};
 
 } // namespace me::components
