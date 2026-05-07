@@ -15,7 +15,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 
 # Compatibility: Modulus looks for 'glfw', but vcpkg gives 'glfw3::glfw'
-if(TARGET glfw3::glfw)
+if (TARGET glfw3::glfw)
     add_library(glfw ALIAS glfw3::glfw)
 endif()
 
@@ -31,6 +31,13 @@ add_subdirectory(engine)
 
 # If this is the top-level project, build the sandbox.
 # If someone included us as a submodule, CMAKE_SOURCE_DIR will be their game folder, so we skip building the sandbox!
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    add_subdirectory(sandbox)
+if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    option(BUILD_SANDBOX "Build the sandbox application" ON)
+    if (BUILD_SANDBOX)
+        add_subdirectory(sandbox)
+    endif()
+
+# Being included by another game (User Mode)
+else()
+    message(STATUS "MiniEngine included as a library. Sandbox disabled.")
 endif()

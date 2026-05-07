@@ -1,7 +1,7 @@
 #include <mini-engine/core/engine.hpp>
 #include <mini-engine/core/application.hpp>
 
-#include "sandbox/core/Game.hpp"
+#include "sandbox/core/game.hpp"
 
 int main() {
 	me::AppConfig config;
